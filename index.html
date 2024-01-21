@@ -3,10 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title>Todo List</title>
   </head>
   <body>
-    <h1 class="text-yellow-300">Todo List JS</h1>
+    <form name="todo-form">
+      <label for="new-todo">Todo :</label>
+      <input type="text" id="new-todo" />
+      <button type="submit" id="add-button">Add</button>
+    </form>
+    <h1>Todo Lists</h1>
+    <table id="todo-table"></table>
+    <script src="script.js"></script>
   </body>
 </html>
