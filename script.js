@@ -1,6 +1,7 @@
 const newTodo = document.getElementById("new-todo");
 const addbuton = document.getElementById("add-button");
 const todoTable = document.getElementById("todo-table");
+const searchEvent = document.getElementById("search");
 
 const todoLists = [];
 
@@ -10,28 +11,43 @@ function clearTodolist() {
   }
 }
 
+function addTodoList(todo) {
+  const tr = document.createElement("tr");
+
+  const tdButton = document.createElement("td");
+  const buttonDone = document.createElement("button");
+  buttonDone.textContent = "Done";
+  tdButton.appendChild(buttonDone);
+  tr.appendChild(tdButton);
+
+  const tdTodo = document.createElement("td");
+  tdTodo.textContent = todo;
+  tr.appendChild(tdTodo);
+
+  todoTable.appendChild(tr);
+}
+
 function displayTodolist() {
   clearTodolist();
 
-  for (const todo of todoLists) {
-    const tr = document.createElement("tr");
+  for (let i = 0; i < todoLists.length; i++) {
+    const todo = todoLists[i];
+    const search = document.getElementById("search").value.toLowerCase();
 
-    const tdButton = document.createElement("td");
-    tr.appendChild(tdButton);
-
-    const tdTodo = document.createElement("td");
-    tdTodo.textContent = todo;
-    tr.appendChild(tdTodo);
-
-    todoTable.appendChild(tr);
+    if (todo.toLowerCase().includes(search)) {
+      addTodoList(todo);
+    }
   }
 }
 
 document.forms["todo-form"].onsubmit = (event) => {
   todoLists.push(newTodo.value);
-  console.log(todoLists);
+
   displayTodolist();
 
   newTodo.value = "";
   event.preventDefault();
 };
+
+searchEvent.onkeydown = () => displayTodolist();
+searchEvent.onkeyup = () => displayTodolist();
